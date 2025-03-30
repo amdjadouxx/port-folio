@@ -9,7 +9,6 @@ Un portfolio moderne pour développeur web & mobile, créé avec Next.js, React 
 - 📱 Design entièrement réactif (mobile, tablette, bureau)
 - 🚀 Performance optimisée (Core Web Vitals)
 - 🔍 SEO optimisé
-- 🖼️ Génération d'images dynamiques (OpenGraph, favicon, placeholders)
 - 🧩 Architecture modulaire et composants réutilisables
 
 ## Sections
@@ -50,7 +49,6 @@ portfolio-2025/
 │   │   ├── favicon.tsx
 │   │   ├── icon.tsx
 │   │   ├── layout.tsx
-│   │   ├── opengraph-image.tsx
 │   │   └── page.tsx
 │   ├── components/
 │   │   ├── header/
