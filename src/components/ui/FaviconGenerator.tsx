@@ -8,7 +8,7 @@ interface FaviconGeneratorProps {
 }
 
 const FaviconGenerator: React.FC<FaviconGeneratorProps> = ({
-  text = 'D',  // Initiale par défaut
+  text = 'D',
   backgroundColor = '#3B82F6',
   textColor = '#FFFFFF',
   size = 32

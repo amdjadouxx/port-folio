@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 
-// Définition des liens de navigation
 const navLinks = [
   { href: '#about', label: 'À propos' },
   { href: '#projects', label: 'Projets' },
@@ -13,7 +12,6 @@ const navLinks = [
   { href: '#contact', label: 'Contact' }
 ];
 
-// Variants d'animation
 const mobileMenuVariants = {
   closed: { opacity: 0, x: 300 },
   open: { opacity: 1, x: 0 }
@@ -24,13 +22,10 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
-  // Effet pour détecter le défilement et la section active
   useEffect(() => {
     const handleScroll = () => {
-      // Vérifier si la page a défilé
       setIsScrolled(window.scrollY > 20);
       
-      // Détecter la section active
       const sections = navLinks.map(link => link.href.substring(1));
       
       for (const section of sections.reverse()) {
@@ -58,7 +53,6 @@ export default function Header() {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center">
           <motion.div 
             className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl"
@@ -73,7 +67,6 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* Navigation sur ordinateur */}
         <nav className="hidden md:flex items-center space-x-1">
           {navLinks.map((link) => (
             <Link
@@ -96,7 +89,6 @@ export default function Header() {
             </Link>
           ))}
           
-          {/* Bouton de contact */}
           <Link
             href="#contact"
             className="ml-4 px-6 py-2 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-sm"
@@ -104,16 +96,12 @@ export default function Header() {
             Me contacter
           </Link>
           
-          {/* Toggle thème clair/sombre */}
           <ThemeToggle />
         </nav>
 
-        {/* Boutons pour mobile */}
         <div className="flex items-center space-x-2 md:hidden">
-          {/* Toggle thème clair/sombre */}
           <ThemeToggle />
           
-          {/* Bouton de menu mobile */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 dark:text-gray-200"
@@ -146,7 +134,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Menu mobile */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -187,4 +174,4 @@ export default function Header() {
       </AnimatePresence>
     </header>
   );
-} 
+}

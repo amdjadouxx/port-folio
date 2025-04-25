@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { fetchGitHubProjects } from '@/services/github';
 
-// Pour le typage des projets GitHub
 interface GitHubProject {
   id: number;
   name: string;
@@ -19,10 +18,9 @@ interface GitHubProject {
   updated: string;
   topics: string[];
   image: string;
-  category?: string; // Catégorie attribuée au projet
+  category?: string;
 }
 
-// Définition des catégories de projets
 interface ProjectCategory {
   name: string;
   topics: string[];
@@ -55,7 +53,6 @@ const projectCategories: Record<string, ProjectCategory> = {
   }
 };
 
-// Animation variants améliorés
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -81,34 +78,27 @@ const itemVariants = {
   }
 };
 
-// Fonction pour déterminer la catégorie d'un projet
 const determineProjectCategory = (project: GitHubProject): string => {
-  // Vérifier les sujets (topics) du projet pour déterminer sa catégorie
   for (const [categoryKey, category] of Object.entries(projectCategories)) {
-    if (categoryKey === 'other') continue; // Sauter la catégorie "other" pour l'instant
+    if (categoryKey === 'other') continue;
     
-    // Vérifier si au moins l'un des sujets du projet correspond à cette catégorie
     if (project.topics.some(topic => category.topics.includes(topic as string))) {
       return categoryKey;
     }
     
-    // Vérifier également le langage si les topics ne sont pas suffisants
     if (project.language && category.topics.includes(project.language.toLowerCase())) {
       return categoryKey;
     }
   }
   
-  // Si le langage est Python, c'est probablement du Data Science (pour les projets sans topics)
   if (project.language === 'Python' || project.language === 'Jupyter Notebook') {
     return 'data-science';
   }
   
-  // Si le langage est JavaScript/TypeScript, c'est probablement du web
   if (['JavaScript', 'TypeScript', 'HTML', 'CSS'].includes(project.language)) {
     return 'web-development';
   }
   
-  // Si le projet n'appartient à aucune catégorie spécifique, le classer comme 'other'
   return 'other';
 };
 
@@ -119,25 +109,21 @@ export default function Projects() {
   const [projectsByCategory, setProjectsByCategory] = useState<Record<string, GitHubProject[]>>({});
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   
-  // Récupérer les projets GitHub
   useEffect(() => {
     const getProjects = async () => {
       try {
         setLoading(true);
-        const githubProjects = await fetchGitHubProjects(30); // Augmenter la limite pour avoir plus de projets
+        const githubProjects = await fetchGitHubProjects(30);
         
-        // Attribuer des catégories aux projets
         const projectsWithCategories = githubProjects.map(project => ({
           ...project,
           category: determineProjectCategory(project)
         }));
 
-        // Grouper les projets par catégorie
         const groupedProjects: Record<string, GitHubProject[]> = {
           'all': projectsWithCategories
         };
 
-        // Créer des entrées pour chaque catégorie
         Object.keys(projectCategories).forEach(key => {
           groupedProjects[key] = projectsWithCategories.filter(project => project.category === key);
         });
@@ -154,10 +140,8 @@ export default function Projects() {
     getProjects();
   }, []);
   
-  // Projets filtrés par catégorie
   const filteredProjects = projectsByCategory[activeCategory] || [];
   
-  // Fonction pour formater le nom du projet
   const formatProjectName = (name: string) => {
     return name
       .replace(/-/g, ' ')
@@ -170,7 +154,6 @@ export default function Projects() {
   return (
     <section id="projects" className="py-24 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-6">
-        {/* En-tête de section */}
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-800 dark:text-white">
             Mes Projets
@@ -181,14 +164,12 @@ export default function Projects() {
           </p>
         </div>
         
-        {/* État de chargement */}
         {loading && (
           <div className="flex justify-center items-center py-20">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
         )}
         
-        {/* Message d'erreur */}
         {error && (
           <div className="text-center py-10">
             <p className="text-red-500 dark:text-red-400 text-lg">{error}</p>
@@ -201,7 +182,6 @@ export default function Projects() {
           </div>
         )}
         
-        {/* Filtres de catégories */}
         {!loading && !error && (
           <div className="flex flex-wrap justify-center gap-4 mb-16">
             <button
@@ -217,7 +197,6 @@ export default function Projects() {
             </button>
             
             {Object.entries(projectCategories).map(([key, category]) => (
-              // Afficher uniquement les catégories qui ont des projets
               projectsByCategory[key]?.length > 0 && (
                 <button
                   key={key}
@@ -235,11 +214,9 @@ export default function Projects() {
           </div>
         )}
         
-        {/* Projets groupés par catégorie */}
         {!loading && !error && (
           <>
             {activeCategory === 'all' ? (
-              // Si "Tous les projets" est sélectionné, afficher les projets regroupés par catégorie
               Object.entries(projectCategories).map(([categoryKey, category]) => {
                 const categoryProjects = projectsByCategory[categoryKey] || [];
                 if (categoryProjects.length === 0) return null;
@@ -283,7 +260,6 @@ export default function Projects() {
                 );
               })
             ) : (
-              // Sinon, afficher uniquement les projets de la catégorie sélectionnée
               <motion.div 
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
                 variants={containerVariants}
@@ -304,7 +280,6 @@ export default function Projects() {
           </>
         )}
         
-        {/* Message quand aucun projet ne correspond au filtre */}
         {!loading && !error && filteredProjects.length === 0 && (
           <div className="text-center py-10">
             <p className="text-gray-600 dark:text-gray-300 text-lg">
@@ -323,7 +298,6 @@ export default function Projects() {
   );
 }
 
-// Composant de carte de projet réutilisable
 interface ProjectCardProps {
   project: GitHubProject;
   hoveredProject: number | null;
@@ -340,7 +314,6 @@ function ProjectCard({ project, hoveredProject, setHoveredProject, formatProject
       onMouseLeave={() => setHoveredProject(null)}
       variants={itemVariants}
     >
-      {/* Image du projet avec overlay amélioré */}
       <div className="relative h-52 w-full overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/70 z-10" />
         
@@ -352,7 +325,6 @@ function ProjectCard({ project, hoveredProject, setHoveredProject, formatProject
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            // Si l'image échoue, on utilise un placeholder
             target.style.display = 'none';
             const parent = target.parentElement;
             if (parent) {
@@ -368,14 +340,12 @@ function ProjectCard({ project, hoveredProject, setHoveredProject, formatProject
               
               const ctx = canvas.getContext('2d');
               if (ctx) {
-                // Dessiner un dégradé moderne
                 const gradient = ctx.createLinearGradient(0, 0, 400, 225);
                 gradient.addColorStop(0, '#4f46e5');
                 gradient.addColorStop(1, '#3b82f6');
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, 400, 225);
                 
-                // Ajouter des formes géométriques pour un design moderne
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
                 ctx.beginPath();
                 ctx.arc(50, 50, 80, 0, Math.PI * 2);
@@ -386,7 +356,6 @@ function ProjectCard({ project, hoveredProject, setHoveredProject, formatProject
                 ctx.arc(350, 150, 100, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Ajouter le texte du projet
                 ctx.font = 'bold 20px system-ui, -apple-system, sans-serif';
                 ctx.textAlign = 'center';
                 ctx.fillStyle = 'white';
@@ -396,7 +365,6 @@ function ProjectCard({ project, hoveredProject, setHoveredProject, formatProject
           }}
         />
         
-        {/* Tag du langage principal mis en évidence */}
         {project.language && (
           <span 
             className="absolute top-4 left-4 z-20 text-xs font-medium px-4 py-1.5 bg-blue-600 text-white rounded-full shadow-lg backdrop-blur-sm"
@@ -406,7 +374,6 @@ function ProjectCard({ project, hoveredProject, setHoveredProject, formatProject
         )}
       </div>
       
-      {/* Contenu du projet avec meilleur espacement */}
       <div className="flex flex-col flex-grow p-6">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -429,7 +396,6 @@ function ProjectCard({ project, hoveredProject, setHoveredProject, formatProject
           </div>
         </div>
         
-        {/* Topics affichés en boutons élégants */}
         {project.topics.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
             {project.topics.slice(0, 3).map((topic: string, index: number) => (
@@ -458,7 +424,6 @@ function ProjectCard({ project, hoveredProject, setHoveredProject, formatProject
           )}
         </p>
         
-        {/* Liens du projet améliorés avec boutons distincts */}
         <div className="flex gap-4 pt-2 mt-auto">
           {project.homepage && (
             <a 
@@ -489,4 +454,4 @@ function ProjectCard({ project, hoveredProject, setHoveredProject, formatProject
       </div>
     </motion.div>
   );
-} 
+}

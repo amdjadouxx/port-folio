@@ -4,25 +4,22 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { fetchGitHubProjects } from '@/services/github';
 
-// Interface pour le type Technology
 interface Technology {
   name: string;
-  count: number; // Nombre d'occurrences dans les projets
+  count: number;
   icon?: string;
 }
 
-// Catégories prédéfinies pour regrouper les technologies
 const techCategories = {
   'frontend': ['javascript', 'typescript', 'react', 'vue', 'next', 'html', 'css', 'sass', 'tailwind', 'webpack', 'vite', 'angular'],
-  'backend': ['node', 'express', 'python', 'django', 'flask', 'java', 'spring', 'php', 'laravel', 'ruby', 'rails', 'go', 'rust', 'c#', '.net', 'nestjs'],
+  'backend': ['node', 'express', 'python', 'django', 'flask', 'java', 'spring', 'php', 'laravel', 'ruby', 'rails', 'go', 'rust', 'c#', '.net', 'nestjs', 'c++', 'assembly'],
   'database': ['mongodb', 'mysql', 'postgresql', 'sqlite', 'redis', 'firebase', 'supabase', 'dynamodb', 'cassandra'],
   'mobile': ['react-native', 'flutter', 'swift', 'kotlin', 'android', 'ios'],
   'devops': ['git', 'github', 'gitlab', 'docker', 'kubernetes', 'aws', 'azure', 'gcp', 'jenkins', 'ci/cd', 'terraform', 'ansible'],
   'tools': ['figma', 'adobe', 'photoshop', 'illustrator', 'xd'],
-  'other': [] // Catégorie par défaut
+  'other': []
 };
 
-// Animation des éléments lors du défilement
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: (i = 0) => ({
@@ -36,7 +33,6 @@ const fadeInUp = {
   })
 };
 
-// Fonction pour déterminer la catégorie d'une technologie
 const getTechCategory = (techName: string): string => {
   const lowerTech = techName.toLowerCase();
   
@@ -49,9 +45,7 @@ const getTechCategory = (techName: string): string => {
   return 'other';
 };
 
-// Fonction pour obtenir la première lettre de la technologie (pour l'icône)
 const getTechInitial = (techName: string): string => {
-  // Cas spéciaux
   const specialCases: Record<string, string> = {
     'javascript': 'JS',
     'typescript': 'TS',
@@ -81,29 +75,23 @@ export default function Skills() {
   const [activeCategory, setActiveCategory] = useState('frontend');
   const [categoryNames, setCategoryNames] = useState<string[]>([]);
   
-  // Récupérer les technologies à partir des projets GitHub
   useEffect(() => {
     const extractTechnologies = async () => {
       try {
         setIsLoading(true);
-        const projects = await fetchGitHubProjects(20); // Récupérer jusqu'à 20 projets pour un meilleur échantillon
+        const projects = await fetchGitHubProjects(20);
         
-        // Map pour compter les occurrences de chaque technologie
         const techMap = new Map<string, number>();
         
-        // Analyser chaque projet pour extraire les technologies
         projects.forEach(project => {
-          // Extraire du langage principal
           if (project.language) {
             techMap.set(project.language, (techMap.get(project.language) || 0) + 1);
           }
           
-          // Extraire des topics
           project.topics.forEach((topic: string) => {
             techMap.set(topic, (techMap.get(topic) || 0) + 1);
           });
           
-          // Analyser le nom du projet pour des indices sur les technologies
           const projectNameLower = project.name.toLowerCase();
           for (const [, techs] of Object.entries(techCategories)) {
             techs.forEach((tech: string) => {
@@ -114,7 +102,6 @@ export default function Skills() {
           }
         });
         
-        // Filtrer pour ne garder que les technologies qui apparaissent dans au moins 2 projets
         const filteredTechs = Array.from(techMap.entries())
           .filter(([, count]) => count >= 2)
           .map(([name, count]): Technology => ({
@@ -123,7 +110,6 @@ export default function Skills() {
             icon: getTechInitial(name)
           }));
         
-        // Regrouper par catégorie
         const groupedTechs: Record<string, Technology[]> = {};
         filteredTechs.forEach(tech => {
           const category = getTechCategory(tech.name);
@@ -133,7 +119,6 @@ export default function Skills() {
           groupedTechs[category].push(tech);
         });
         
-        // Trier chaque catégorie par nombre d'occurrences
         Object.keys(groupedTechs).forEach(category => {
           groupedTechs[category].sort((a, b) => b.count - a.count);
         });
@@ -141,7 +126,6 @@ export default function Skills() {
         setTechnologies(groupedTechs);
         setCategoryNames(Object.keys(groupedTechs).sort());
         
-        // Si aucune technologie n'est trouvée dans la catégorie active, choisir la première catégorie disponible
         if (groupedTechs[activeCategory]?.length === 0 && categoryNames.length > 0) {
           setActiveCategory(categoryNames[0]);
         }
@@ -155,13 +139,11 @@ export default function Skills() {
     };
     
     extractTechnologies();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (
     <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
-        {/* En-tête de section */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
             Mes Compétences
@@ -172,24 +154,20 @@ export default function Skills() {
           </p>
         </div>
         
-        {/* État de chargement */}
         {isLoading && (
           <div className="flex justify-center items-center py-20">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
         )}
         
-        {/* Message d'erreur */}
         {error && (
           <div className="text-center py-10">
             <p className="text-red-500 dark:text-red-400 text-lg">{error}</p>
           </div>
         )}
         
-        {/* Affichage des technologies */}
         {!isLoading && !error && Object.keys(technologies).length > 0 && (
           <div className="mx-auto">
-            {/* Navigation entre catégories */}
             <div className="flex flex-wrap justify-center gap-3 mb-12">
               {categoryNames.map((category) => (
                 <button
@@ -206,7 +184,6 @@ export default function Skills() {
               ))}
             </div>
             
-            {/* Grille de technologies */}
             <motion.div 
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-4xl mx-auto"
               variants={fadeInUp}
@@ -232,7 +209,6 @@ export default function Skills() {
               ))}
             </motion.div>
             
-            {/* Message si aucune technologie dans la catégorie */}
             {technologies[activeCategory]?.length === 0 && (
               <div className="text-center py-10">
                 <p className="text-gray-600 dark:text-gray-300 text-lg">
@@ -245,4 +221,4 @@ export default function Skills() {
       </div>
     </section>
   );
-} 
+}

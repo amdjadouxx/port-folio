@@ -16,24 +16,21 @@ export default function ProjectImagePlaceholder({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Définir la taille du canvas
     canvas.width = width;
     canvas.height = height;
 
-    // Couleurs basées sur l'ID du projet pour une certaine cohérence
     const colors = [
-      ['#3b82f6', '#1e40af'], // bleu
-      ['#10b981', '#047857'], // vert
-      ['#f59e0b', '#b45309'], // orange
-      ['#8b5cf6', '#5b21b6'], // violet
-      ['#ef4444', '#b91c1c'], // rouge
-      ['#06b6d4', '#0e7490']  // cyan
+      ['#3b82f6', '#1e40af'],
+      ['#10b981', '#047857'],
+      ['#f59e0b', '#b45309'],
+      ['#8b5cf6', '#5b21b6'],
+      ['#ef4444', '#b91c1c'],
+      ['#06b6d4', '#0e7490']
     ];
     
     const colorIndex = (projectId - 1) % colors.length;
     const [primaryColor, secondaryColor] = colors[colorIndex];
-    
-    // Fonction pour générer un dégradé basé sur l'ID du projet
+
     const createGradient = () => {
       const gradient = ctx.createLinearGradient(0, 0, width, height);
       gradient.addColorStop(0, primaryColor);
@@ -41,13 +38,10 @@ export default function ProjectImagePlaceholder({
       return gradient;
     };
 
-    // Dessiner l'arrière-plan avec un dégradé
     ctx.fillStyle = createGradient();
     ctx.fillRect(0, 0, width, height);
 
-    // Ajouter des motifs basés sur l'ID du projet
     const drawPatterns = () => {
-      // Motif de base: points et lignes
       for (let i = 0; i < 20; i++) {
         const x = Math.random() * width;
         const y = Math.random() * height;
@@ -55,17 +49,14 @@ export default function ProjectImagePlaceholder({
         
         ctx.beginPath();
         if (i % 3 === 0) {
-          // Cercles
           ctx.arc(x, y, size / 2, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.2 + 0.1})`;
           ctx.fill();
         } else if (i % 3 === 1) {
-          // Rectangles
           ctx.rect(x, y, size, size);
           ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.15 + 0.05})`;
           ctx.fill();
         } else {
-          // Lignes
           const endX = x + (Math.random() - 0.5) * 100;
           const endY = y + (Math.random() - 0.5) * 100;
           ctx.moveTo(x, y);
@@ -77,9 +68,7 @@ export default function ProjectImagePlaceholder({
       }
     };
 
-    // Créer des motifs géométriques basés sur l'ID du projet
     const drawGeometricPattern = () => {
-      // Motif différent basé sur l'ID du projet (modulo 6)
       switch (projectId % 6) {
         case 0: // Grille
           for (let x = 0; x < width; x += 40) {

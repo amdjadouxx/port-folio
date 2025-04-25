@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import ProfilePlaceholder from '@/components/ui/ProfilePlaceholder';
 
-// Animation pour le texte tapé
 interface TypeAnimationProps {
   text: string;
   className?: string;
@@ -40,14 +39,11 @@ const TypeAnimation = ({ text, className = '', speed = 75 }: TypeAnimationProps)
 };
 
 export default function Hero() {
-  // Détecte si une image de profil personnalisée est disponible
   const [hasCustomProfileImage, setHasCustomProfileImage] = useState(false);
 
   useEffect(() => {
-    // Vérifier si l'image de profil personnalisée existe
-    // Utiliser une approche qui fonctionne côté client uniquement
     if (typeof window !== 'undefined') {
-      const imgElement = new window.Image(); // Constructeur Image côté client
+      const imgElement = new window.Image();
       imgElement.src = '/images/profile.jpg';
       
       imgElement.onload = () => setHasCustomProfileImage(true);
@@ -57,16 +53,13 @@ export default function Hero() {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative pt-24 pb-20">
-      {/* Fond coloré dégradé amélioré */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50 via-indigo-50 to-white dark:from-gray-900 dark:via-indigo-950/20 dark:to-gray-800 z-[-2]" />
       
-      {/* Éléments décoratifs */}
       <div className="absolute top-20 left-10 w-64 h-64 bg-blue-400/10 dark:bg-blue-500/10 rounded-full filter blur-3xl z-[-1]" />
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-indigo-400/10 dark:bg-indigo-500/10 rounded-full filter blur-3xl z-[-1]" />
       
       <div className="container mx-auto px-6 z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-16">
-          {/* Contenu gauche */}
           <div className="flex-1 text-center md:text-left">
             <motion.h2 
               initial={{ opacity: 0, y: -20 }}
@@ -126,7 +119,6 @@ export default function Hero() {
             </motion.div>
           </div>
           
-          {/* Image ou illustration */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -153,13 +145,11 @@ export default function Hero() {
                 />
               )}
               
-              {/* Élément décoratif en arrière-plan de la photo */}
               <div className="absolute -z-10 -inset-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full blur-xl opacity-30 animate-pulse-slow" />
             </div>
           </motion.div>
         </div>
         
-        {/* Technologies en vedette */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -188,7 +178,6 @@ export default function Hero() {
           </div>
         </motion.div>
         
-        {/* Icônes de défilement */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -205,4 +194,4 @@ export default function Hero() {
       </div>
     </section>
   );
-} 
+}

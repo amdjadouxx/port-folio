@@ -1,6 +1,5 @@
 "use client";
 
-// Informations de contact
 const contactInfo = [
   {
     icon: (
@@ -9,8 +8,8 @@ const contactInfo = [
       </svg>
     ),
     title: 'Email',
-    value: 'amdjad.ahmod-ali@epitech.eu',
-    link: 'mailto:amdjad.ahmod-ali@epitech.eu'
+    value: 'amdjad.freelance@gmail.com',
+    link: 'mailto:amdjad.freelance@gmail.com'
   },
   {
     icon: (
@@ -35,7 +34,6 @@ const contactInfo = [
   }
 ];
 
-// Réseaux sociaux
 const socialLinks = [
   {
     name: 'LinkedIn',
@@ -61,7 +59,6 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 bg-white dark:bg-gray-800">
       <div className="container mx-auto px-4">
-        {/* En-tête de section */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
             Me Contacter
@@ -72,7 +69,6 @@ export default function Contact() {
           </p>
         </div>
         
-        {/* Call-to-action box */}
         <div className="max-w-3xl mx-auto mb-16 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
             <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-800 text-blue-600 dark:text-blue-400">
@@ -90,13 +86,11 @@ export default function Contact() {
         </div>
         
         <div className="max-w-3xl mx-auto">
-          {/* Informations de contact et réseaux sociaux */}
           <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
             <h3 className="text-2xl font-semibold mb-8 text-gray-800 dark:text-white">
               Mes coordonnées
             </h3>
             
-            {/* Moyens de contact */}
             <div className="space-y-6 mb-10">
               {contactInfo.map((item, index) => (
                 <a
@@ -117,7 +111,6 @@ export default function Contact() {
               ))}
             </div>
             
-            {/* Réseaux sociaux */}
             <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
               Suivez-moi sur les réseaux
             </h3>
@@ -140,4 +133,4 @@ export default function Contact() {
       </div>
     </section>
   );
-} 
+}

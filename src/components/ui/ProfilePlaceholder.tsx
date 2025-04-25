@@ -26,22 +26,17 @@ export default function ProfilePlaceholder({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Définir la taille du canvas
     canvas.width = size;
     canvas.height = size;
 
-    // Dessiner l'arrière-plan
     ctx.fillStyle = colorBackground;
     ctx.fillRect(0, 0, size, size);
 
-    // Dessiner diverses formes géométriques
-    // Cercle central
     ctx.beginPath();
     ctx.arc(size / 2, size / 2, size / 4, 0, Math.PI * 2);
     ctx.fillStyle = colorPrimary;
     ctx.fill();
 
-    // Formes aléatoires en arrière-plan
     const drawRandomShapes = () => {
       for (let i = 0; i < 10; i++) {
         const x = Math.random() * size;
@@ -50,19 +45,17 @@ export default function ProfilePlaceholder({
         
         ctx.beginPath();
         
-        // Alterner entre cercles et rectangles
         if (i % 2 === 0) {
           ctx.arc(x, y, radius, 0, Math.PI * 2);
         } else {
           ctx.rect(x - radius, y - radius, radius * 2, radius * 2);
         }
         
-        ctx.fillStyle = i % 3 === 0 ? colorSecondary : `${colorPrimary}80`; // Ajouter de la transparence
+        ctx.fillStyle = i % 3 === 0 ? colorSecondary : `${colorPrimary}80`;
         ctx.fill();
       }
     };
 
-    // Dessiner des motifs abstraits
     const drawPattern = () => {
       for (let i = 0; i < 5; i++) {
         const startX = Math.random() * size;
@@ -79,11 +72,9 @@ export default function ProfilePlaceholder({
       }
     };
 
-    // Brouiller l'ordre des rendus pour un effet plus aléatoire
     drawRandomShapes();
     drawPattern();
     
-    // Redessiner le cercle central pour qu'il soit au premier plan
     ctx.beginPath();
     ctx.arc(size / 2, size / 2, size / 4, 0, Math.PI * 2);
     ctx.fillStyle = colorPrimary;
