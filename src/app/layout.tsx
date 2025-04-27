@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Développeur Web & Mobile",
+  title: "Portfolio",
   description: "Portfolio professionnel présentant mes projets et compétences en développement web et mobile.",
   keywords: ["développeur", "web", "frontend", "backend", "fullstack", "portfolio", "react", "nextjs"],
   authors: [{ name: "Développeur Moderne" }],

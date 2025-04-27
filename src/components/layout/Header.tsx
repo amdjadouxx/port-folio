@@ -71,31 +71,49 @@ export default function Header() {
               ></span>
             </Link>
           ))}
+          
+          <Link
+            href="/cgv"
+            className="text-xs px-3 py-1 ml-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium"
+            aria-label="Conditions Générales de Vente"
+          >
+            CGV
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden flex items-center p-2"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          <div className="relative w-6 h-5">
-            <span 
-              className={`absolute h-0.5 w-6 bg-gray-800 dark:bg-white transform transition-all duration-300 ${
-                mobileMenuOpen ? 'rotate-45 top-2.5' : 'rotate-0 top-0'
-              }`}
-            ></span>
-            <span 
-              className={`absolute h-0.5 w-6 bg-gray-800 dark:bg-white transform transition-all duration-300 ${
-                mobileMenuOpen ? 'opacity-0' : 'opacity-100 top-2'
-              }`}
-            ></span>
-            <span 
-              className={`absolute h-0.5 w-6 bg-gray-800 dark:bg-white transform transition-all duration-300 ${
-                mobileMenuOpen ? '-rotate-45 top-2.5' : 'rotate-0 top-4'
-              }`}
-            ></span>
-          </div>
-        </button>
+        <div className="md:hidden flex items-center space-x-2">
+          <Link
+            href="/cgv"
+            className="text-xs px-2 py-1 rounded-full border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300"
+            aria-label="Conditions Générales de Vente"
+          >
+            CGV
+          </Link>
+          
+          <button 
+            className="flex items-center p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <div className="relative w-6 h-5">
+              <span 
+                className={`absolute h-0.5 w-6 bg-gray-800 dark:bg-white transform transition-all duration-300 ${
+                  mobileMenuOpen ? 'rotate-45 top-2.5' : 'rotate-0 top-0'
+                }`}
+              ></span>
+              <span 
+                className={`absolute h-0.5 w-6 bg-gray-800 dark:bg-white transform transition-all duration-300 ${
+                  mobileMenuOpen ? 'opacity-0' : 'opacity-100 top-2'
+                }`}
+              ></span>
+              <span 
+                className={`absolute h-0.5 w-6 bg-gray-800 dark:bg-white transform transition-all duration-300 ${
+                  mobileMenuOpen ? '-rotate-45 top-2.5' : 'rotate-0 top-4'
+                }`}
+              ></span>
+            </div>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
@@ -120,8 +138,16 @@ export default function Header() {
               {item.name}
             </Link>
           ))}
+          
+          <Link
+            href="/cgv"
+            className="text-sm font-medium px-2 py-1 text-gray-600 dark:text-gray-300 mt-2 border-t border-gray-100 dark:border-gray-800 pt-2"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Conditions Générales de Vente (CGV)
+          </Link>
         </nav>
       </motion.div>
     </header>
   );
-} 
+}

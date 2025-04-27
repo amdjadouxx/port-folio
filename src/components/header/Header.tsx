@@ -95,11 +95,27 @@ export default function Header() {
           >
             Me contacter
           </Link>
+
+          <Link
+            href="/cgv"
+            className="ml-3 px-3 py-1 text-xs rounded-full border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium"
+            aria-label="Conditions Générales de Vente"
+          >
+            CGV
+          </Link>
           
           <ThemeToggle />
         </nav>
 
         <div className="flex items-center space-x-2 md:hidden">
+          <Link
+            href="/cgv"
+            className="p-2 rounded-full text-xs border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 font-medium"
+            aria-label="Conditions Générales de Vente"
+          >
+            CGV
+          </Link>
+          
           <ThemeToggle />
           
           <button
@@ -166,6 +182,13 @@ export default function Header() {
                   className="w-full text-center px-8 py-3 rounded-xl bg-blue-600 text-white font-medium text-xl"
                 >
                   Me contacter
+                </Link>
+                <Link
+                  href="/cgv"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center px-8 py-3 rounded-xl border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 font-medium text-xl"
+                >
+                  Conditions Générales de Vente (CGV)
                 </Link>
               </nav>
             </div>
