@@ -42,7 +42,7 @@ export default function CGVPage() {
               Commande
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-2">Toute commande est confirmée par signature du devis ou acceptation écrite (email).</p>
-            <p className="text-gray-700 dark:text-gray-300">Pour les particuliers, un délai de rétractation de 14 jours est applicable sauf si la prestation débute avant la fin de ce délai avec l'accord du client.</p>
+            <p className="text-gray-700 dark:text-gray-300">Pour les particuliers, un délai de rétractation de 14 jours est applicable sauf si la prestation débute avant la fin de ce délai avec l&apos;accord du client.</p>
           </section>
 
           <section className="mb-8">
@@ -50,7 +50,7 @@ export default function CGVPage() {
               Prix et Paiement
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-2">Les prix sont exprimés en euros et hors taxes.</p>
-            <p className="text-gray-700 dark:text-gray-300 mb-2">Les paiements s'effectuent par virement bancaire.</p>
+            <p className="text-gray-700 dark:text-gray-300 mb-2">Les paiements s&apos;effectuent par virement bancaire.</p>
             <p className="text-gray-700 dark:text-gray-300">Délai de paiement : immédiat pour les particuliers, 30 jours pour les professionnels sauf mention contraire.</p>
           </section>
 
@@ -58,23 +58,23 @@ export default function CGVPage() {
             <h2 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">
               Droit de Rétractation (BtoC uniquement)
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 mb-2">Conformément aux articles L.221-18 et suivants du Code de la consommation, le client particulier dispose d'un délai de rétractation de 14 jours.</p>
-            <p className="text-gray-700 dark:text-gray-300">Le client peut demander à ce que l'exécution de la prestation commence avant la fin du délai ; dans ce cas, le droit de rétractation est limité aux prestations non exécutées.</p>
+            <p className="text-gray-700 dark:text-gray-300 mb-2">Conformément aux articles L.221-18 et suivants du Code de la consommation, le client particulier dispose d&apos;un délai de rétractation de 14 jours.</p>
+            <p className="text-gray-700 dark:text-gray-300">Le client peut demander à ce que l&apos;exécution de la prestation commence avant la fin du délai ; dans ce cas, le droit de rétractation est limité aux prestations non exécutées.</p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">
               Retard de Paiement
             </h2>
-            <p className="text-gray-700 dark:text-gray-300">Toute somme non payée à l'échéance entraîne l'application de pénalités de retard égales à 3 fois le taux d'intérêt légal, ainsi qu'une indemnité forfaitaire de 40 € pour frais de recouvrement (art. D.441-5 du Code de commerce).</p>
+            <p className="text-gray-700 dark:text-gray-300">Toute somme non payée à l&apos;échéance entraîne l&apos;application de pénalités de retard égales à 3 fois le taux d&apos;intérêt légal, ainsi qu&apos;une indemnité forfaitaire de 40 € pour frais de recouvrement (art. D.441-5 du Code de commerce).</p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">
               Propriété Intellectuelle
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 mb-2">Les livrables restent la propriété du prestataire jusqu'au paiement intégral de la facture.</p>
-            <p className="text-gray-700 dark:text-gray-300">Après paiement, le client bénéficie d'un droit d'usage personnel non exclusif sur les livrables.</p>
+            <p className="text-gray-700 dark:text-gray-300 mb-2">Les livrables restent la propriété du prestataire jusqu&apos;au paiement intégral de la facture.</p>
+            <p className="text-gray-700 dark:text-gray-300">Après paiement, le client bénéficie d&apos;un droit d&apos;usage personnel non exclusif sur les livrables.</p>
           </section>
 
           <section className="mb-8">
@@ -82,7 +82,7 @@ export default function CGVPage() {
               Responsabilité
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-2">Le prestataire est responsable uniquement en cas de faute prouvée et dans les limites convenues contractuellement.</p>
-            <p className="text-gray-700 dark:text-gray-300">Il ne pourra être tenu responsable des problèmes résultant de l'intervention de tiers ou de la force majeure.</p>
+            <p className="text-gray-700 dark:text-gray-300">Il ne pourra être tenu responsable des problèmes résultant de l&apos;intervention de tiers ou de la force majeure.</p>
           </section>
 
           <section className="mb-8">
@@ -97,7 +97,7 @@ export default function CGVPage() {
               href="/"
               className="px-6 py-2 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-sm"
             >
-              Retour à l'accueil
+              Retour à l&apos;accueil
             </Link>
           </div>
         </div>
