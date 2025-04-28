@@ -89,7 +89,7 @@ export default function CGVPage() {
             <h2 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">
               Médiation de la Consommation
             </h2>
-            <p className="text-gray-700 dark:text-gray-300">En cas de litige, le consommateur peut saisir gratuitement le médiateur de la consommation (en cours) : <a href="http://(en cours)" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">(en cours)</a></p>
+            <p className="text-gray-700 dark:text-gray-300">En cas de litige, le consommateur peut saisir gratuitement le médiateur de la consommation CNPM Mediation Consommation : <a href="https://www.cnpm-mediation-consommation.eu" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">CNPM Mediation consommation</a></p>
           </section>
 
           <div className="mt-10">
